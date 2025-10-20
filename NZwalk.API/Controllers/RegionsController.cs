@@ -19,6 +19,7 @@ namespace NZwalk.API.Controllers
         public RegionsController(NZWalksDbContext dbContext, IRegionRepository regionRepository)
         {
             this._dbContext = dbContext;
+            this.regionRepository = regionRepository;
         }
 
         // GET ALL REGIONS
