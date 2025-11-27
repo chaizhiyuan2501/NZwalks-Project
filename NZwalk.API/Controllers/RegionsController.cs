@@ -31,6 +31,7 @@ namespace NZwalk.API.Controllers
         // GET ALL REGIONS
         // GET: https://localhost:portnumber/api/regions
         [HttpGet]
+        [Authorize(Roles = "Reader")]
         public async Task<IActionResult> GetAll()
         {
             //从数据库获取数据保存到领域模型里
@@ -58,6 +59,7 @@ namespace NZwalk.API.Controllers
 
         [HttpGet]
         [Route("{id:guid}")] // 路由规则下，接受一个Guid类型的id
+        [Authorize(Roles = "Reader")]
         public async Task<IActionResult> GetById([FromRoute] Guid id) // 从URL路径获取Guid类型的id
         {
             // 只能按照主键查询实体
@@ -81,6 +83,7 @@ namespace NZwalk.API.Controllers
         //POST: https://lacalhost:portnumber/api/regions
         [HttpPost]
         [ValidateModel]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> Create([FromBody] AddRegionRequestDto addRegionRequestDto)
         {
             //Map or Convert DTO to Domain Model
@@ -100,6 +103,7 @@ namespace NZwalk.API.Controllers
         [HttpPut]
         [Route("{id:guid}")]
         [ValidateModel]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateRegionRequestDto updateRegionRequestDto)
         {
 
@@ -124,6 +128,7 @@ namespace NZwalk.API.Controllers
         //Delete: https://lacalhost:portnumber/api/regions/{id}
         [HttpDelete]
         [Route("{id:Guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             //Check if region exists
